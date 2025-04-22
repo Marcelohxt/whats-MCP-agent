@@ -59,7 +59,7 @@ O WhatsApp Simulator é um sistema avançado de atendimento automatizado que sim
 
 1. **Clone o repositório**
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
+git clone [[URL_DO_REPOSITÓRIO](https://github.com/Marcelohxt/whats-MCP-agent.git)]
 cd MCP-WHATSAPP-main
 ```
 
