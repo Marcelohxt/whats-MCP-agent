@@ -13,8 +13,10 @@ O WhatsApp Simulator é um sistema avançado de atendimento automatizado que sim
 ### 🌟 Desenvolvedor
 - **Nome:** Marcelo Henrique
 - **Email:** marcelo_hxt@hotmail.com
-- **LinkedIn:** [Adicione seu perfil LinkedIn aqui]
-- **GitHub:** [Adicione seu perfil GitHub aqui]
+- **Tel:** 55-11-910521048
+- **LinkedIn:** 
+- **GitHub:**
+  
 
 ## 🚀 Funcionalidades
 
