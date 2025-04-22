@@ -2,7 +2,9 @@
 
 Um servidor webhook em Python usando FastAPI para integração com a API do WhatsApp Business. Este projeto permite receber e responder mensagens do WhatsApp automaticamente com comandos personalizados.
 
-![Banner do Projeto](./images/banner.png)
+![image](https://github.com/user-attachments/assets/5f94e39d-60a4-4851-b59f-9b8301da9e65)
+
+
 
 ## 📋 Índice
 
@@ -53,7 +55,8 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-![Configuração do Ambiente](./images/env-setup.png)
+![image](https://github.com/user-attachments/assets/873561aa-c763-47db-a283-06f027256de0)
+
 
 ## ⚙️ Configuração
 
