@@ -1,145 +1,164 @@
-# WhatsApp Webhook Server
+# WhatsApp Simulator - Sistema de Atendimento Automatizado
 
-Um servidor webhook em Python usando FastAPI para integração com a API do WhatsApp Business. Este projeto permite receber e responder mensagens do WhatsApp automaticamente com comandos personalizados.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![Status](https://img.shields.io/badge/status-production--ready-green)
 
-![Banner do Projeto](./images/banner.png)
+## 📱 Sobre o Projeto
 
-## 📋 Índice
+O WhatsApp Simulator é um sistema avançado de atendimento automatizado que simula a interface e funcionalidades do WhatsApp. Desenvolvido para empresas que desejam automatizar e melhorar seu atendimento ao cliente, o sistema oferece uma experiência familiar aos usuários enquanto proporciona ferramentas poderosas de automação.
 
-- [Funcionalidades](#-funcionalidades)
-- [Requisitos](#-requisitos)
-- [Instalação](#-instalação)
-- [Configuração](#-configuração)
-- [Uso](#-uso)
-- [Comandos Disponíveis](#-comandos-disponíveis)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Testes](#-testes)
-- [Contribuição](#-contribuição)
-- [Licença](#-licença)
+### 🌟 Desenvolvedor
+- **Nome:** Marcelo Henrique
+- **Email:** marcelo_hxt@hotmail.com
+- **LinkedIn:** [Adicione seu perfil LinkedIn aqui]
+- **GitHub:** [Adicione seu perfil GitHub aqui]
 
-## ✨ Funcionalidades
+## 🚀 Funcionalidades
 
-- Recebimento de mensagens do WhatsApp em tempo real
-- Processamento automático de comandos
-- Respostas automáticas personalizadas
-- Verificação de webhook integrada
-- Comandos úteis pré-configurados (hora, data, ajuda)
-- Interface de logs detalhada
+### Interface do Usuário
+- 💬 Chat em tempo real
+- 🎤 Gravação e envio de áudio
+- 📷 Envio de imagens
+- 🔄 Status de conexão em tempo real
+- 🗑️ Gerenciamento de conversas
 
-![Demo dos Comandos](./images/demo-commands.png)
+### Processamento de Mídia
+- 🎵 Otimização automática de áudio
+  - Formato MP3
+  - Taxa de amostragem: 16kHz
+  - Áudio mono
+  - Limite de 30 segundos
+  - Compressão inteligente
+- 🖼️ Otimização de imagens
+  - Redimensionamento automático
+  - Compressão JPEG
+  - Qualidade adaptativa
+  - Suporte a múltiplos formatos
 
-## 📦 Requisitos
+### Comunicação
+- 🔌 API Webhook
+- ⚡ Comunicação assíncrona
+- 🔒 Tratamento seguro de dados
+- 📊 Monitoramento de status
 
-- Python 3.8+
-- Conta no WhatsApp Business
-- Conta no Meta Developer Portal
-- Servidor com acesso HTTPS (para produção)
+## 🛠️ Tecnologias Utilizadas
 
-## 🚀 Instalação
+- **Python 3.8+**
+- **Tkinter** - Interface gráfica
+- **Requests** - Comunicação HTTP
+- **SoundDevice** - Processamento de áudio
+- **Pillow** - Processamento de imagens
+- **PyDub** - Manipulação de áudio
+- **NumPy** - Processamento numérico
+- **Base64** - Codificação de mídia
 
-1. Clone o repositório:
+## ⚙️ Instalação
+
+1. **Clone o repositório**
 ```bash
-git clone https://github.com/seu-usuario/whatsapp-webhook.git
-cd whatsapp-webhook
+git clone [URL_DO_REPOSITÓRIO]
+cd MCP-WHATSAPP-main
 ```
 
-2. Instale as dependências:
+2. **Crie um ambiente virtual**
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+
+3. **Instale as dependências**
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Configure as variáveis de ambiente:
-```bash
-cp .env.example .env
-```
+## 🚦 Uso
 
-![Configuração do Ambiente](./images/env-setup.png)
-
-## ⚙️ Configuração
-
-### 1. Meta Developer Portal
-
-1. Acesse [Meta Developers](https://developers.facebook.com/)
-2. Crie um novo app ou use um existente
-3. Adicione o produto "WhatsApp" ao seu app
-4. Configure o webhook
-5. Obtenha as credenciais necessárias
-
-![Configuração Meta Developer](./images/meta-dev-setup.png)
-
-### 2. Variáveis de Ambiente
-
-Edite o arquivo `.env` com suas configurações:
-
-```env
-WHATSAPP_TOKEN=seu_token_aqui
-VERIFY_TOKEN=seu_token_de_verificacao
-```
-
-### 3. Configuração do Webhook
-
-1. Inicie o servidor localmente:
+1. **Inicie o servidor**
 ```bash
 python server.py
 ```
 
-2. Use ngrok ou similar para expor o servidor:
+2. **Execute o simulador**
 ```bash
-ngrok http 3000
+python whatsapp_simulator.py
 ```
 
-![Configuração Webhook](./images/webhook-setup.png)
+3. **Configure o Postman (para testes)**
+- Importe a coleção de endpoints
+- Configure as variáveis de ambiente
+- Execute os testes disponíveis
 
-## 🎮 Uso
+## 📡 API Endpoints
 
-### Iniciando o Servidor
-
-```bash
-python server.py
+### POST /webhook
+```json
+{
+    "messages": [
+        {
+            "from": "5511930779357",
+            "type": "text|audio|image",
+            "body": "conteúdo_da_mensagem",
+            "filename": "nome_do_arquivo"  // para mídia
+        }
+    ]
+}
 ```
 
-O servidor estará disponível em `http://localhost:3000`
+### GET /api/status
+- Retorna o status atual do servidor
 
-### Testando com Postman
+## 🔧 Configuração
 
-1. Importe a coleção do Postman (disponível em `docs/postman`)
-2. Configure as variáveis de ambiente no Postman
-3. Execute os endpoints de teste
-
-![Teste no Postman](./images/postman-test.png)
-
-## 🤖 Comandos Disponíveis
-
-| Comando | Descrição | Exemplo de Resposta |
-|---------|-----------|-------------------|
-| hora    | Mostra a hora atual | "Agora são: 14:30:45" |
-| data    | Mostra a data atual | "Hoje é: 25/03/2024" |
-| ajuda   | Lista todos os comandos | Lista de comandos disponíveis |
-
-## 📁 Estrutura do Projeto
-
-```
-whatsapp-webhook/
-├── server.py           # Servidor principal
-├── requirements.txt    # Dependências
-├── .env               # Configurações
-├── README.md          # Documentação
-├── docs/              # Documentação adicional
-├── tests/             # Testes
-└── images/            # Imagens da documentação
+### Configurações do Servidor
+```python
+HOST = "localhost"
+PORT = 8000
+MAX_AUDIO_DURATION = 30  # segundos
+MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 ```
 
-## 🧪 Testes
-
-Execute os testes com:
-```bash
-pytest tests/
+### Configurações de Mídia
+```python
+AUDIO_SAMPLE_RATE = 16000
+AUDIO_CHANNELS = 1
+IMAGE_MAX_SIZE = (800, 800)
+IMAGE_QUALITY = 85
 ```
+
+## 🎯 Casos de Uso
+
+- **Clínicas e Consultórios**
+  - Agendamento automatizado
+  - Confirmação de consultas
+  - Envio de resultados
+
+- **Comércio**
+  - Atendimento ao cliente
+  - Catálogo de produtos
+  - Status de pedidos
+
+- **Serviços**
+  - Orçamentos automáticos
+  - Agendamento de serviços
+  - Suporte técnico
+
+## 📈 Roadmap
+
+- [ ] Integração com IA para respostas automáticas
+- [ ] Painel administrativo web
+- [ ] Análise de sentimentos
+- [ ] Relatórios e métricas
+- [ ] Integração com CRM
+- [ ] Suporte a múltiplos idiomas
 
 ## 🤝 Contribuição
 
-1. Fork o projeto
-2. Crie sua branch de feature (`git checkout -b feature/AmazingFeature`)
+Contribuições são bem-vindas! Para contribuir:
+
+1. Faça um Fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
 3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
@@ -148,21 +167,19 @@ pytest tests/
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
+## 📞 Suporte
+
+Para suporte e dúvidas, entre em contato:
+- Email: marcelo_hxt@hotmail.com
+- Issues: [GitHub Issues](link_para_issues)
+
+## 🙏 Agradecimentos
+
+- Equipe de desenvolvimento
+- Contribuidores
+- Usuários e testadores
+
 ---
-
-## 📸 Capturas de Tela
-
-### Dashboard Principal
-![Dashboard](./images/dashboard.png)
-
-### Logs de Mensagens
-![Logs](./images/message-logs.png)
-
-### Painel de Administração
-![Admin Panel](./images/admin-panel.png)
-
----
-
 Desenvolvido com ❤️ por Marcelo Henrique
 
 [⬆ Voltar ao topo](#whatsapp-webhook-server) 
