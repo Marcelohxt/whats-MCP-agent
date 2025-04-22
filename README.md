@@ -6,6 +6,8 @@
 
 ## 📱 Sobre o Projeto
 
+![Interface do Sistema](https://github.com/user-attachments/assets/5f94e39d-60a4-4851-b59f-9b8301da9e65)
+
 O WhatsApp Simulator é um sistema avançado de atendimento automatizado que simula a interface e funcionalidades do WhatsApp. Desenvolvido para empresas que desejam automatizar e melhorar seu atendimento ao cliente, o sistema oferece uma experiência familiar aos usuários enquanto proporciona ferramentas poderosas de automação.
 
 ### 🌟 Desenvolvedor
@@ -75,6 +77,29 @@ pip install -r requirements.txt
 
 ## 🚦 Uso
 
+![Exemplo de Uso](https://github.com/user-attachments/assets/873561aa-c763-47db-a283-06f027256de0)
+
+## ⚙️ Configuração
+
+### 1. Meta Developer Portal
+
+1. Acesse [Meta Developers](https://developers.facebook.com/)
+2. Crie um novo app ou use um existente
+3. Adicione o produto "WhatsApp" ao seu app
+4. Configure o webhook
+5. Obtenha as credenciais necessárias
+
+### 2. Variáveis de Ambiente
+
+Edite o arquivo `.env` com suas configurações:
+
+```env
+WHATSAPP_TOKEN=seu_token_aqui
+VERIFY_TOKEN=seu_token_de_verificacao
+```
+
+### 3. Inicialização
+
 1. **Inicie o servidor**
 ```bash
 python server.py
@@ -109,7 +134,7 @@ python whatsapp_simulator.py
 ### GET /api/status
 - Retorna o status atual do servidor
 
-## 🔧 Configuração
+## 🔧 Configurações do Sistema
 
 ### Configurações do Servidor
 ```python
@@ -182,4 +207,4 @@ Para suporte e dúvidas, entre em contato:
 ---
 Desenvolvido com ❤️ por Marcelo Henrique
 
-[⬆ Voltar ao topo](#whatsapp-webhook-server) 
+[⬆ Voltar ao topo](#whatsapp-simulator---sistema-de-atendimento-automatizado) 
