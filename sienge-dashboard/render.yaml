@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: crm-django
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn nome_do_projeto.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        value: sua_chave_secreta_aqui

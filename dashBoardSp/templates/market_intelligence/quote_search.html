@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cotação de Materiais - Sienge{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="page-title">
+                <i class="fas fa-search-dollar me-2"></i>
+                Cotação de Materiais
+            </h2>
+        </div>
+    </div>
+
+    <!-- Formulário de Busca -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form id="quoteForm" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="material">Material</label>
+                                    <input type="text" class="form-control" id="material" name="material" 
+                                           placeholder="Ex: Bloco cerâmico 14x19x39">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="reportFormat">Formato do Relatório</label>
+                                    <select class="form-control" id="reportFormat" name="report_format">
+                                        <option value="excel">Excel</option>
+                                        <option value="pdf">PDF</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-gradient mt-4">
+                                    <i class="fas fa-search me-2"></i>
+                                    Buscar Preços
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload de Planilha -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-excel me-2"></i>
+                        Cotação em Lote
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="bulkQuoteForm" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label for="file">Arquivo de Materiais (Excel ou CSV)</label>
+                                    <input type="file" class="form-control" id="file" name="file" 
+                                           accept=".xlsx,.xls,.csv">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-gradient mt-4">
+                                    <i class="fas fa-upload me-2"></i>
+                                    Processar Arquivo
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resultados -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list me-2"></i>
+                        Resultados da Cotação
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="resultsTable">
+                            <thead>
+                                <tr>
+                                    <th>Loja</th>
+                                    <th>Produto</th>
+                                    <th>Preço</th>
+                                    <th>Região</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Resultados serão inseridos aqui via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Função para formatar preço
+    function formatPrice(price) {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(price);
+    }
+
+    // Função para adicionar resultados à tabela
+    function addResultsToTable(results) {
+        const tbody = $('#resultsTable tbody');
+        tbody.empty();
+
+        results.forEach(result => {
+            tbody.append(`
+                <tr>
+                    <td>${result.store_name}</td>
+                    <td>${result.product_name}</td>
+                    <td>${formatPrice(result.price)}</td>
+                    <td>${result.region}</td>
+                    <td>
+                        <a href="${result.url}" target="_blank" class="btn btn-sm btn-gradient">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            `);
+        });
+    }
+
+    // Handler para busca individual
+    $('#quoteForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        $.ajax({
+            url: '{% url "market_intelligence:quote_search" %}',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.success) {
+                    addResultsToTable(response.results);
+                    if (response.report_url) {
+                        window.open(response.report_url, '_blank');
+                    }
+                } else {
+                    alert('Erro ao buscar preços: ' + response.error);
+                }
+            },
+            error: function() {
+                alert('Erro ao processar a requisição');
+            }
+        });
+    });
+
+    // Handler para upload de arquivo
+    $('#bulkQuoteForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        $.ajax({
+            url: '{% url "market_intelligence:bulk_quote" %}',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.success) {
+                    window.open(response.report_url, '_blank');
+                } else {
+                    alert('Erro ao processar arquivo: ' + response.error);
+                }
+            },
+            error: function() {
+                alert('Erro ao processar a requisição');
+            }
+        });
+    });
+});
+</script>
+{% endblock %} 

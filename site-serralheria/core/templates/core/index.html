@@ -1,0 +1,314 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1>R.A Portões</h1>
+            <p>Excelência em Serralheria e Automação</p>
+            <div class="hero-buttons">
+                <a href="#contato" class="cta-button primary">Solicitar Orçamento</a>
+                <a href="#portoes" class="cta-button secondary">Ver Nossos Portões</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorias de Portões -->
+    <section class="categorias-portoes py-16 sm:py-24">
+        <div class="container">
+            <header class="mb-12 text-center">
+                <h2 class="text-4xl font-bold text-neutral-800 font-highlight">Categorias de Portões</h2>
+            </header>
+            <div class="portoes-grid">
+                <!-- Portão Aço Tubular -->
+                <div class="portao-item">
+                    <div class="portao-image">
+                        <img src="{% static 'images/portoes/portao_1.jpg' %}" alt="Portão">
+                    </div>
+                    <a href="#contato" class="saiba-mais">SAIBA MAIS</a>
+                </div>
+
+                <!-- Portão Aço Tubular com Chapa -->
+                <div class="portao-item">
+                    <div class="portao-image">
+                        <img src="{% static 'images/portoes/portao_2.jpg' %}" alt="Portão">
+                    </div>
+                    <a href="#contato" class="saiba-mais">SAIBA MAIS</a>
+                </div>
+
+                <!-- Portão em Aço Tubular com Tela -->
+                <div class="portao-item">
+                    <div class="portao-image">
+                        <img src="{% static 'images/portoes/portao_3.jpg' %}" alt="Portão">
+                    </div>
+                    <a href="#contato" class="saiba-mais">SAIBA MAIS</a>
+                </div>
+
+                <!-- Portões Instalados / Depoimentos -->
+                <div class="portao-item">
+                    <div class="portao-image">
+                        <img src="{% static 'images/portoes/portao_4.jpg' %}" alt="Portão">
+                    </div>
+                    <a href="#contato" class="saiba-mais">SAIBA MAIS</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section class="sobre">
+        <div class="image-wrapper">
+            <img class="sobre-img" 
+                 src="{% static 'images/about/sobrenos.jpg' %}" 
+                 alt="Conheça mais sobre - R.A Portões" 
+                 loading="lazy">
+        </div>
+
+        <div class="content">
+            <header>
+                <p class="subtitle">Sobre nós</p>                
+                <h2 class="title">R.A Portões e Pinturas Eletrostaticas</h2>
+                
+            </header>
+
+            <div class="description">
+                <p>Localizada no coração de Ribeirão Pires, cidade turística e charmosa do Grande ABC, a Serralheria R.A Portões é referência em qualidade, confiança e inovação no segmento de portões e estruturas metálicas.</p>
+                
+                <p>Nossa equipe altamente qualificada está comprometida em entender as necessidades específicas de cada cliente, entregando portões robustos, funcionais e esteticamente agradáveis. Na R.A Portões, você encontra inovação, segurança e atendimento personalizado, sempre focando na satisfação e tranquilidade de quem confia em nossos produtos.</p>
+                
+                <div class="button-wrapper">
+                    <a href="#contato" class="btn-red">
+                        SAIBA MAIS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfólio -->
+    <section class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Portões Instalados</h2>
+            <div class="carousel">
+                <div class="carousel-track">
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_1.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_2.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_3.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_4.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_12.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_15.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_18.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_20.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_24.jpg' %}" alt="Portão">
+                    </div>
+                    <div class="carousel-img">
+                        <img src="{% static 'images/portoes/portao_28.jpg' %}" alt="Portão">
+                    </div>
+                </div>
+                <button class="prev" aria-label="Anterior">&#10094;</button>
+                <button class="next" aria-label="Próximo">&#10095;</button>
+            </div>
+            <div class="whatsapp-button-container">
+                <a href="https://wa.me/5511999999999" class="whatsapp-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Solicitar Orçamento
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="depoimentos">
+        <div class="container">
+            <div class="stars-container">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <h2 class="section-title">Como a R.A Portões é avaliada no Google</h2>
+            <p class="depoimentos-subtitle">
+                Cada avaliação reflete nosso compromisso com a excelência. Visite nossa 
+                página no Google e veja por que somos a escolha ideal para sua empresa!
+            </p>
+            <div class="depoimentos-button">
+                <a href="https://g.page/r/SEU-ID-DO-GOOGLE" target="_blank" class="conferir-avaliacoes">
+                    Conferir Avaliações
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/5511999999999?text=Olá! Gostaria de fazer um orçamento." class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-text">Fale conosco!</span>
+    </a>
+
+    <!-- Contato -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contato-content">
+                <div class="contato-info animate">
+                    <h3>Informações de Contato</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="endereco-info">
+                                <p>Av. Humberto de Campos, 1799</p>
+                                <p>Bocaina - Ribeirão Pires/SP</p>
+                                <p>CEP: 09426-070 image.png</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div class="contato-telefones">
+                                <p>Tel: (11) 9999-9999</p>
+                                <p>Cel: (11) 99999-9999</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <div class="whatsapp-info">
+                                <p>WhatsApp: (11) 99999-9999</p>
+                                <a href="https://wa.me/5511999999999" class="whatsapp-link" target="_blank">Clique aqui para conversar</a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <p>Email: contato@raportoes.com.br</p>
+                        </li>
+                    </ul>
+                    <div class="horario-atendimento">
+                        <h4>Horário de Atendimento</h4>
+                        <p>Segunda a Sexta: 08h às 18h</p>
+                        <p>Sábado: 08h às 13h</p>
+                    </div>
+                </div>
+                <div class="contato-form animate">
+                    <form action="#" method="POST" id="form-contato">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+            {% if contato.mapa_embed %}
+            <div class="mapa animate">
+                {{ contato.mapa_embed|safe }}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Header scroll effect
+    document.addEventListener('DOMContentLoaded', function() {
+        const header = document.querySelector('.header');
+        const nav = document.querySelector('.nav');
+        const logo = document.querySelector('.logo');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+                nav.classList.add('scrolled');
+                logo.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+                nav.classList.remove('scrolled');
+                logo.classList.remove('scrolled');
+            }
+        });
+
+        // Carrossel
+        const track = document.querySelector('.carousel-track');
+        const images = document.querySelectorAll('.carousel-img');
+        const nextBtn = document.querySelector('.next');
+        const prevBtn = document.querySelector('.prev');
+        let index = 0;
+
+        function updateCarousel() {
+            const width = images[0].clientWidth;
+            track.style.transform = `translateX(-${index * width}px)`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            index = (index + 1) % images.length;
+            updateCarousel();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            index = (index - 1 + images.length) % images.length;
+            updateCarousel();
+        });
+
+        window.addEventListener('resize', updateCarousel);
+
+        // Iniciar o carrossel
+        updateCarousel();
+    });
+
+    // Animação ao scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const animateElements = document.querySelectorAll('.animate');
+        
+        function checkScroll() {
+            animateElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight * 0.8) {
+                    element.classList.add('animate-visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        checkScroll();
+    });
+
+    // Menu mobile
+    document.querySelector('.mobile-menu').addEventListener('click', function() {
+        this.classList.toggle('active');
+        document.querySelector('.nav-links').classList.toggle('active');
+    });
+</script>
+{% endblock %} 

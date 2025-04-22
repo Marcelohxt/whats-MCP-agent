@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Orçamentos - Sienge{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h2>Orçamentos</h2>
+        </div>
+    </div>
+
+    <!-- Cards de Resumo -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card dashboard-card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Orçado</h5>
+                    <h2 class="card-text">R$ 0,00</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Realizado</h5>
+                    <h2 class="card-text">R$ 0,00</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Variação</h5>
+                    <h2 class="card-text">0%</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Itens Orçados</h5>
+                    <h2 class="card-text">0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico de Comparativo -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Comparativo Orçado x Realizado</h5>
+                </div>
+                <div class="card-body">
+                    <div id="grafico_comparativo" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Dados de exemplo - serão substituídos por dados reais
+        const data = [{
+            x: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+            y: [100000, 120000, 90000, 110000, 95000],
+            name: 'Orçado',
+            type: 'bar'
+        }, {
+            x: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+            y: [95000, 115000, 88000, 105000, 92000],
+            name: 'Realizado',
+            type: 'bar'
+        }];
+
+        const layout = {
+            barmode: 'group',
+            title: 'Comparativo Mensal'
+        };
+
+        createChart('grafico_comparativo', data, layout);
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - Sienge{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h2>Dashboard</h2>
+        </div>
+    </div>
+
+    <!-- Cards de Resumo -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card dashboard-card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Solicitações de Compra</h5>
+                    <h2 class="card-text" data-value="total_solicitacoes">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Pedidos em Andamento</h5>
+                    <h2 class="card-text" data-value="total_pedidos">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Cotações em Aberto</h5>
+                    <h2 class="card-text" data-value="total_cotacoes">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card dashboard-card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Itens em Estoque</h5>
+                    <h2 class="card-text" data-value="total_itens">0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Solicitações por Status</h5>
+                </div>
+                <div class="card-body">
+                    <div id="grafico_solicitacoes" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Pedidos por Mês</h5>
+                </div>
+                <div class="card-body">
+                    <div id="grafico_pedidos" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Inicialização dos gráficos
+    document.addEventListener('DOMContentLoaded', function() {
+        // Dados de exemplo - serão substituídos por dados reais da API
+        const dadosSolicitacoes = {
+            data: [{
+                values: [30, 20, 15, 10],
+                labels: ['Em Análise', 'Aprovado', 'Pendente', 'Rejeitado'],
+                type: 'pie'
+            }],
+            layout: {
+                title: 'Status das Solicitações'
+            }
+        };
+
+        const dadosPedidos = {
+            data: [{
+                x: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+                y: [20, 25, 30, 22, 28],
+                type: 'bar'
+            }],
+            layout: {
+                title: 'Pedidos por Mês'
+            }
+        };
+
+        createChart('grafico_solicitacoes', dadosSolicitacoes.data, dadosSolicitacoes.layout);
+        createChart('grafico_pedidos', dadosPedidos.data, dadosPedidos.layout);
+    });
+</script>
+{% endblock %} 

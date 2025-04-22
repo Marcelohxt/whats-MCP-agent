@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Market Intelligence - Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="page-title">
+                <i class="fas fa-chart-line me-2"></i>
+                Market Intelligence Dashboard
+            </h2>
+        </div>
+    </div>
+
+    <!-- Price Trends Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Tendências de Preços
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Material</th>
+                                    <th>Preço Atual</th>
+                                    <th>Variação</th>
+                                    <th>Tendência (7 dias)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for trend in price_trends %}
+                                <tr>
+                                    <td>{{ trend.material }}</td>
+                                    <td>R$ {{ trend.current_price }}</td>
+                                    <td>
+                                        <span class="{% if trend.variation > 0 %}text-success{% else %}text-danger{% endif %}">
+                                            {{ trend.variation }}%
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="sparkline" data-history="{{ trend.history|safe }}"></div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market News Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-newspaper me-2"></i>
+                        Notícias do Mercado
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% for news in sample_news %}
+                    <div class="news-item mb-4">
+                        <h6 class="news-title">{{ news.title }}</h6>
+                        <p class="news-meta text-muted">
+                            <small>
+                                <i class="fas fa-calendar-alt me-1"></i> {{ news.date }}
+                                <i class="fas fa-building ms-2 me-1"></i> {{ news.source }}
+                            </small>
+                        </p>
+                        <p class="news-summary">{{ news.summary }}</p>
+                    </div>
+                    {% if not forloop.last %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Função para criar gráficos de linha para cada material
+    function createSparkline(element, history) {
+        const data = JSON.parse(history.replace(/'/g, '"'));
+        const prices = data.map(item => item.price);
+        const dates = data.map(item => item.date);
+        
+        const canvas = document.createElement('canvas');
+        canvas.height = 50;
+        element.appendChild(canvas);
+        
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    data: prices,
+                    borderColor: '#4e73df',
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        display: false
+                    },
+                    y: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    // Criar sparklines para cada linha da tabela
+    document.querySelectorAll('.sparkline').forEach(element => {
+        const history = element.dataset.history;
+        createSparkline(element, history);
+    });
+});
+</script>
+{% endblock %} 
